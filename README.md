@@ -1,3 +1,36 @@
+# PR Hospital Management System
+
+## Overview
+PR Hospital Management System is a web application designed to manage hospital operations efficiently. It provides functionalities for users, doctors, and admins, including managing appointments, applying for doctor roles, and accessing profiles.
+
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [File Structure](#file-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+- **User Authentication**: Secure login and registration for users.
+- **Appointment Management**: Users can book, view, and manage appointments.
+- **Doctor Application**: Users can apply for doctor roles.
+- **Profile Management**: Users and doctors can manage their profiles.
+- **Admin Dashboard**: Admins can manage users and doctors.
+
+## Technologies Used
+- **Frontend**: React, Redux, React Router, Ant Design, react-hot-toast
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB, Mongoose
+- **Others**: JWT for authentication, bcrypt for password hashing
+
+## Installation
+
+### Prerequisites
+- Node.js and npm installed
+- MongoDB instance running
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
