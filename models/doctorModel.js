@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema(
   {
-    userId:{
-        type: String,
-        required: true,
+    userId: {
+      type: String,
+      required: true,
     },
     firstName: {
       type: String,
@@ -20,7 +20,7 @@ const doctorSchema = new mongoose.Schema(
     },
     address: {
       type: String,
-      required: true, 
+      required: true,
     },
     specialization: {
       type: String,
@@ -28,15 +28,19 @@ const doctorSchema = new mongoose.Schema(
     },
     experience: {
       type: String,
-      required: true, 
+      required: true,
     },
-    feePerConsultation: { 
+    feePerConsultation: {
       type: Number,
       required: true,
     },
     timings: {
-        type: Array,
-        required: true,
+      type: Array,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "pending",
     },
   },
   {

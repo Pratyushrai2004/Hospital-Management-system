@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "../layout.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Badge } from "antd";
 
 function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
-  const navigate = useNavigate(); // Correct use of useNavigate hook
+  const navigate = useNavigate();
 
   const userMenu = [
     {
@@ -40,12 +41,12 @@ function Layout({ children }) {
     },
     {
       name: "Users",
-      path: "/users",
+      path: "/admin/userslist",
       icon: "ri-user-line",
     },
     {
       name: "Doctors",
-      path: "/doctors",
+      path: "/admin/doctorslist",
       icon: "ri-nurse-line",
     },
     {
@@ -55,8 +56,26 @@ function Layout({ children }) {
     },
   ];
 
-  const menuToBeRendered = user?.isAdmin ? adminMenu : userMenu; // check this here you can change the admin and user 
-  
+  const doctorMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "ri-home-4-line",
+    },
+    {
+      name: "Appointments",
+      path: "/appointments",
+      icon: "ri-file-list-3-line",
+    },
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "ri-account-box-line",
+    },
+  ];
+
+  const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
+  const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";
 
   return (
     <div className="main">
@@ -82,6 +101,11 @@ function Layout({ children }) {
               </div>
             ) : (
               <h1>PR Hospital</h1>
+            )}
+            {collapsed ? (
+              <p className="role-collapsed">{role}</p>
+            ) : (
+              <p className="role">{role}</p>
             )}
           </div>
           <div className="menu">
@@ -117,7 +141,9 @@ function Layout({ children }) {
             <Link className="anchor" to="/profile">
               {user?.fname} {user?.lname}
             </Link>
-            <i className="ri-notification-3-line noti"></i>
+            <Badge count={user?.unseenNotifications.length} onClick={() => navigate('/notifications')}>
+              <i className="ri-notification-3-line noti"></i>
+            </Badge>
           </div>
           <div className="body">{children}</div>
         </div>

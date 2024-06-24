@@ -70,7 +70,29 @@ label {
   margin-top: 20px;
   padding-top: 10px;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
+.anchor-2 {
+  cursor: pointer;
+  color:  #337ab7;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+.anchor-3{
+  cursor: pointer;
+  color:  rgb(203, 8, 8);
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.anchor-3:hover{
+  color: rgba(248, 77, 77, 0.845);
+}
+
+.anchor-2:hover {
+  color: #40a9ff;
+}
+
 
 .anchor:hover {
   text-decoration: underline;

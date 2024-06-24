@@ -1,35 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout";
+import { Col, Row } from "antd";
+import Doctor from "../components/Doctor";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/alertsReducer";
 
 export default function Home() {
+  const [doctors, setDoctors] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.post(
-          "/api/user/get-user-info-by-id",
-          {}, //payload
-          {
-            headers: {    //https header 
-              Authorization: "Bearer " + localStorage.getItem("token"), //Bearer type hai and authorization is https header which is used to send credentials 
-            },
-          }
-        );
-      
+        dispatch(showLoading());
+        const response = await axios.get("/api/user/get-all-approved-doctors", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        });
+        dispatch(hideLoading());
+        console.log("Response from backend:", response);
+        if (response.data.success) {
+          setDoctors(response.data.data);
+        }
       } catch (error) {
-        
+        dispatch(hideLoading());
+        console.error("Error fetching doctors:", error);
       }
     };
 
     getData();
-  }, []); // Empty dependency array to run only once when component mounts
+  }, [dispatch]);
 
   return (
     <div>
       <Layout>
-        <h1>home page</h1>
+        <Row gutter={[16, 16]}>
+          {doctors.map((doctor) => (
+            <Col key={doctor._id} span={8} xs={24} sm={24} lg={8}>
+              <Doctor doctor={doctor} />
+            </Col>
+          ))}
+        </Row>
       </Layout>
     </div>
   );
 }
-
