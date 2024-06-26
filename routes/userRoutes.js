@@ -295,7 +295,7 @@ router.post('/update-user-profile', authMiddleware, async (req, res) => {
     const user = await User.findByIdAndUpdate(
       userId,
       { fname, lname, phone },
-      { new: true }
+      { new: true } //this update the user details 
     );
     if (!user) {
       return res.status(404).send({ success: false, message: 'User not found' });

@@ -86,7 +86,7 @@ function DoctorsList() {
       render: (text, record) => (
         <div style={{ display: 'flex' }}>
           {record.status === "pending" && <Button type="link" onClick={() => changeDoctorStatus(record, 'approved')}>Approve</Button>}
-          {record.status === "approved" && <Button type="link" onClick={() => changeDoctorStatus(record, 'blocked')}>Block</Button>}
+          {record.status === "approved" && <Button type="link" onClick={() => changeDoctorStatus(record, 'pending')}>Block</Button>}
         </div>
       ),
     }
