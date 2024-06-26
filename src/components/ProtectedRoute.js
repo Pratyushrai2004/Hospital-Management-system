@@ -33,7 +33,7 @@ export default function ProtectedRoute(props) {
 
             if(!user){
 
-                getUser()
+                getUser();
             }
     },[user])
     if(localStorage.getItem('token')){

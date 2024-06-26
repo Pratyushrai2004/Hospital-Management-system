@@ -252,5 +252,63 @@ router.post("/check-booking-availability", authMiddleware, async (req, res) => {
   }
 });
 
+router.get("/get-appointments-by-user-id", authMiddleware, async (req, res) => {
+  try {
+    const appointments = await Appointment.find({ userId: req.body.userId});
+    res.status(200).send({
+      message: "Appointments fetched successfully",
+      success: true,
+      data: appointments,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Error in fetching appointments",
+      success: false,
+      error,
+    });
+  }
+});
+
+router.get('/get-user-profile/:userId', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).send({ success: false, message: 'User not found' });
+    }
+    res.status(200).send({
+      success: true,
+      message: 'User profile fetched successfully',
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).send({ message: 'Error fetching user profile', success: false });
+  }
+});
+
+router.post('/update-user-profile', authMiddleware, async (req, res) => {
+  try {
+    const { userId, fname, lname, phone } = req.body;
+    if (!userId) {
+      return res.status(400).send({ success: false, message: 'User ID is required' });
+    }
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { fname, lname, phone },
+      { new: true }
+    );
+    if (!user) {
+      return res.status(404).send({ success: false, message: 'User not found' });
+    }
+    res.status(200).send({
+      success: true,
+      message: 'User profile updated successfully',
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Error updating user profile', success: false });
+  }
+});
 module.exports = router;
  

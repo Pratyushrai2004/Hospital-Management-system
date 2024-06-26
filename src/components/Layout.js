@@ -28,7 +28,7 @@ function Layout({ children }) {
     },
     {
       name: "Profile",
-      path: "/profile",
+      path: user ? `/user/get-user-profile/${user._id}` : "/profile",
       icon: "ri-account-box-line",
     },
   ];
@@ -49,11 +49,6 @@ function Layout({ children }) {
       path: "/admin/doctorslist",
       icon: "ri-nurse-line",
     },
-    {
-      name: "Profile",
-      path: "/profile",
-      icon: "ri-account-box-line",
-    },
   ];
 
   const doctorMenu = [
@@ -64,7 +59,7 @@ function Layout({ children }) {
     },
     {
       name: "Appointments",
-      path: "/appointments",
+      path: "/doctor/appointments",
       icon: "ri-file-list-3-line",
     },
     {
@@ -74,7 +69,11 @@ function Layout({ children }) {
     },
   ];
 
-  const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
+  const menuToBeRendered = user?.isAdmin
+    ? adminMenu
+    : user?.isDoctor
+    ? doctorMenu
+    : userMenu;
   const role = user?.isAdmin ? "Admin" : user?.isDoctor ? "Doctor" : "User";
 
   return (
@@ -138,10 +137,13 @@ function Layout({ children }) {
         </div>
         <div className="content">
           <div className="header d-flex justify-content-between align-items-center">
-            <Link className="anchor" to="/profile">
+            <h1 className="userName">
               {user?.fname} {user?.lname}
-            </Link>
-            <Badge count={user?.unseenNotifications.length} onClick={() => navigate('/notifications')}>
+            </h1>
+            <Badge
+              count={user?.unseenNotifications.length}
+              onClick={() => navigate("/notifications")}
+            >
               <i className="ri-notification-3-line noti"></i>
             </Badge>
           </div>

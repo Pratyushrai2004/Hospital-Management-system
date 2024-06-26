@@ -1,5 +1,4 @@
 import { Button, Col, Form, Input, Row } from "antd";
-import moment from "moment";
 import React from "react";
 import CustomTimeInput from "./CustomTimeInput";
 

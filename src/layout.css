@@ -272,22 +272,97 @@ body, html {
     transition: opacity 0.3s ease;
 }
 
-/* Doctor Card Styles */
-
-.doctor-card {
+.page-title-appointment {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px ;
+    color: #333;
+    text-align: center;
+  }
+  
+  .appointment-form-wrapper {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .normal-text-1 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666;
+    text-align: center;
+  }
+  
+  .appointment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .appointment-date,
+  .appointment-time {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .appointment-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  
+  .appointment-button:hover {
+    background-color: #1c4e78d7;
+    border-color: #1c4e78d7;
+  }
+  
+  .appointment-button:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  
+  .image-container {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  
+  .doctor-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    
+  }
+  
+  .doctor-card {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     padding: 16px;
     border: 1px solid #e8e8e8;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    cursor: pointer;
-  }
-  
-  .doctor-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
   .doctor-card.ant-card-meta {
@@ -309,111 +384,52 @@ body, html {
     margin-bottom: 12px;
   }
   
-  .doctor-card.ant-typography {
-    margin-bottom: 4px;
-  }
-  
-  .doctor-card.ant-tag {
-    margin-right: 4px;
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 2px 6px;
-    font-size: 12px;
-    font-weight: 400;
-    color: #666;
-  }
-  
-  .doctor-card.ant-tag:hover {
-    background-color: #eee;
-  }
- /* Appointment Container */
-.appointment-container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Page Title */
-  .page-title-appointment {
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 20px;
+  .doctor-card.ant-typography strong {
     color: #333;
-    text-align: center;
   }
-  
-  /* Normal Text */
-  .normal-text-1 {
+  .timings-header {
     font-size: 16px;
     margin-bottom: 20px;
+    margin-top: 10px;
     color: #666;
-    text-align: center;
-  }
-  
-  /* Appointment Form */
-  .appointment-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  /* Date Picker and Time Input */
-  .appointment-date,
-  .appointment-time {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-  }
-  
-  /* Buttons */
-  .appointment-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1890ff;
-    border-color: #1890ff;
-    color: #ffffff;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: background-color 0.3s, border-color 0.3s;
-    cursor: pointer;
-  }
-  
-  .appointment-button:hover {
-    background-color: #1c4e78d7;
-    border-color: #1c4e78d7;
-  }
-  
-  /* Margin adjustments for buttons */
-  .appointment-button:not(:last-child) {
-    margin-bottom: 10px;
   }
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .appointment-container {
-      padding: 20px;
+      padding: 15px;
     }
-    
+  
     .page-title-appointment {
-      font-size: 22px;
+      font-size: 24px;
     }
-    
+  
+    .appointment-form-wrapper {
+      padding: 15px;
+    }
+  
     .normal-text-1 {
       font-size: 14px;
     }
-    
+  
     .appointment-button {
       font-size: 14px;
     }
-  }
   
-
-
-
+    .doctor-card {
+      padding: 12px;
+    }
+  
+    .doctor-card .ant-card-meta-title {
+      font-size: 16px;
+    }
+  
+    .doctor-card .ant-card-meta-description {
+      font-size: 12px;
+    }
+  
+    .image-container {
+      margin-bottom: 15px;
+    }
+  }
   

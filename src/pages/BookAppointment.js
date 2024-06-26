@@ -4,11 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { hideLoading, showLoading } from "../redux/alertsReducer";
-import { useParams } from "react-router-dom";
-import { Button, Col, DatePicker, Row, TimePicker } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Row,
+  TimePicker,
+  Card,
+  Typography,
+} from "antd";
+import { Navigate } from "react-router-dom";
 import moment from "moment";
 
+const { Meta } = Card;
+const { Text, Title } = Typography;
+
 function BookAppointment() {
+  const navigate = useNavigate();
   const [isAvailable, setIsAvailable] = useState(false);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
@@ -65,6 +78,7 @@ function BookAppointment() {
       dispatch(hideLoading());
       if (response.data.success) {
         toast.success(response.data.message);
+        navigate('/appointments')
       } else {
         toast.error(response.data.message);
       }
@@ -113,22 +127,19 @@ function BookAppointment() {
   return (
     <Layout>
       {doctor && (
-        <div className="appointment-container">
-          <Row>
-            <Col span={12} sm={24} xs={24} lg={8}>
-              <h1 className="page-title-appointment">
+        <Row gutter={16}>
+          <Col span={12}>
+            <div className="appointment-form-wrapper">
+              <Title level={2} className="page-title-appointment">
                 {doctor.firstName} {doctor.lastName}
-              </h1>
+              </Title>
               <hr />
-              <h1 className="normal-text-1">
-                <b>Timings:</b> {doctor.timings[0]} - {doctor.timings[1]}
-              </h1>
-
+              <h1 className="timings-header">Timings: {doctor.timings[0]} - {doctor.timings[1]}</h1>
               <div className="appointment-form">
                 <DatePicker
                   className="appointment-date"
                   format="DD-MM-YYYY"
-                  onChange={(momentDate, dateString) => {
+                  onChange={(momentDate) => {
                     setIsAvailable(false);
                     setDate(momentDate);
                   }}
@@ -142,20 +153,54 @@ function BookAppointment() {
                   }}
                 />
                 <Button
+                  type="primary"
                   className="appointment-button"
                   onClick={checkAvailability}
                 >
                   Check Availability
                 </Button>
                 {isAvailable && (
-                  <Button className="appointment-button" onClick={bookNow}>
+                  <Button
+                    type="primary"
+                    className="appointment-button"
+                    onClick={bookNow}
+                  >
                     Book Now
                   </Button>
                 )}
               </div>
-            </Col>
-          </Row>
-        </div>
+              <Card className="doctor-card">
+                <Meta
+                  title="DoctorDetails"
+                  description={
+                    <>
+                      <Text strong>Specialization:</Text>{" "}
+                      <Text>{doctor.specialization}</Text>
+                      <br />
+                      <Text strong>Experience:</Text>{" "}
+                      <Text>{doctor.experience} years</Text>
+                      <br />
+                      <Text strong>Fee per Visit:</Text>{" "}
+                      <Text>{doctor.feePerConsultation} ₹</Text>
+                      <br/>
+                      <Text strong>Website:</Text>{" "}
+                      <Text>{doctor.website}</Text>
+                    </>
+                  }
+                />
+              </Card>
+            </div>
+          </Col>
+          <Col span={12}>
+            <div className="image-container">
+              <img
+                src="https://static.vecteezy.com/system/resources/previews/002/208/096/original/doctor-appointment-rgb-color-icon-vector.jpg"
+                alt="Doctor Appointment"
+                className="doctor-image"
+              />
+            </div>
+          </Col>
+        </Row>
       )}
     </Layout>
   );

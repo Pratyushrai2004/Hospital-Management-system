@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography, Tag } from "antd";
+import { Card, Typography } from "antd";
 import PropTypes from "prop-types";
 import {useNavigate} from "react-router-dom"
 const { Meta } = Card;
